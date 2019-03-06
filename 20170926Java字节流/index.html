@@ -116,7 +116,7 @@
 <meta property="og:description" content="介绍&amp;emsp;&amp;emsp;在Java的I/O类库中，总共有4种类型的操作。其中java.io.InputStream和java.io.OutputStream分别表示字节输入流和字节输出流，它们都是抽象类，不能实例化，数据流中的最小单位是字节，所以叫做字节流。在这里，只介绍字节流的概念和操作。其他I/O流的概念请参考Java IO 工作机制。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/java%E5%AD%97%E8%8A%82%E6%B5%81.png">
-<meta property="og:updated_time" content="2017-10-20T04:30:34.000Z">
+<meta property="og:updated_time" content="2019-03-06T08:18:26.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 字节流">
 <meta name="twitter:description" content="介绍&amp;emsp;&amp;emsp;在Java的I/O类库中，总共有4种类型的操作。其中java.io.InputStream和java.io.OutputStream分别表示字节输入流和字节输出流，它们都是抽象类，不能实例化，数据流中的最小单位是字节，所以叫做字节流。在这里，只介绍字节流的概念和操作。其他I/O流的概念请参考Java IO 工作机制。">
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2017-10-20 12:30:34" itemprop="dateModified" datetime="2017-10-20T12:30:34+08:00">2017-10-20</time>
+                <time title="修改时间：2019-03-06 16:18:26" itemprop="dateModified" datetime="2019-03-06T16:18:26+08:00">2019-03-06</time>
               
             
           </span>
@@ -469,9 +469,10 @@
       
 
       
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>&emsp;&emsp;在Java的I/O类库中，总共有4种类型的操作。其中java.io.InputStream和java.io.OutputStream分别表示字节输入流和字节输出流，它们都是抽象类，不能实例化，数据流中的最小单位是字节，所以叫做字节流。在这里，只介绍字节流的概念和操作。其他I/O流的概念请参考<a href="/2017/09/15/Java%20IO">Java IO 工作机制</a>。<br><img src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/java%E5%AD%97%E8%8A%82%E6%B5%81.png" alt="字节流"></p>
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>&emsp;&emsp;在Java的I/O类库中，总共有4种类型的操作。其中java.io.InputStream和java.io.OutputStream分别表示字节输入流和字节输出流，它们都是抽象类，不能实例化，数据流中的最小单位是字节，所以叫做字节流。在这里，只介绍字节流的概念和操作。其他I/O流的概念请参考<a href="/20170915/Java%20IO">Java IO 工作机制</a>。<br><img src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/java%E5%AD%97%E8%8A%82%E6%B5%81.png" alt="字节流"></p>
    <a id="more"></a>
-<h1 id="InputStream中的读取数据的方法"><a href="#InputStream中的读取数据的方法" class="headerlink" title="InputStream中的读取数据的方法"></a>InputStream中的读取数据的方法</h1><table>
+<h1 id="InputStream中的读取数据的方法"><a href="#InputStream中的读取数据的方法" class="headerlink" title="InputStream中的读取数据的方法"></a>InputStream中的读取数据的方法</h1><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>序号</th>
@@ -512,13 +513,15 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>&emsp;&emsp;方法的详细信息请参考<a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh/java/io/InputStream.html" target="_blank" rel="noopener">API</a>。</p>
 <h1 id="InputStream代码演示"><a href="#InputStream代码演示" class="headerlink" title="InputStream代码演示"></a>InputStream代码演示</h1><h2 id="字节数组输入流ByteArrayInputStream"><a href="#字节数组输入流ByteArrayInputStream" class="headerlink" title="字节数组输入流ByteArrayInputStream"></a>字节数组输入流ByteArrayInputStream</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String str = <span class="string">"abcdefg"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">byte</span>[] bytes = str.getBytes();<span class="comment">//字符串转换成字节数组</span></span><br><span class="line"></span><br><span class="line">    ByteArrayInputStream bs = <span class="keyword">new</span> ByteArrayInputStream(bytes);</span><br><span class="line">    <span class="keyword">int</span> data = bs.read(); <span class="comment">//从字节数组输入流读取字节</span></span><br><span class="line">    <span class="keyword">while</span> (data!=-<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">char</span> upper = (<span class="keyword">char</span>) Character.toUpperCase(data);</span><br><span class="line">        System.out.print(upper+<span class="string">" "</span>);</span><br><span class="line">        data=bs.read();</span><br><span class="line">    &#125;</span><br><span class="line">    bs.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果为：A B C D E F G</p>
 <h2 id="文件输入流FileInputStream代码演示"><a href="#文件输入流FileInputStream代码演示" class="headerlink" title="文件输入流FileInputStream代码演示"></a>文件输入流FileInputStream代码演示</h2><p>&emsp;&emsp;首先新建一个txt文件夹，里面写入abcdefg。然后利用如下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    File file = <span class="keyword">new</span> File(<span class="string">"test.txt"</span>);</span><br><span class="line">    FileInputStream fs = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>];</span><br><span class="line">    fs.read(bytes);<span class="comment">//从文件输入流读入字节，并输出到字节数组</span></span><br><span class="line">    ByteArrayInputStream bs = <span class="keyword">new</span> ByteArrayInputStream(bytes);</span><br><span class="line">    <span class="keyword">int</span> data = bs.read(); <span class="comment">//从字节数组输入流读取字节</span></span><br><span class="line">    <span class="keyword">while</span> (data!=-<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">char</span> upper = (<span class="keyword">char</span>) Character.toUpperCase(data);</span><br><span class="line">        System.out.print(upper+<span class="string">" "</span>);</span><br><span class="line">        data=bs.read();</span><br><span class="line">    &#125;</span><br><span class="line">    bs.close();</span><br><span class="line">    fs.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>结果为：A B C D E F G<br>&emsp;&emsp;这里我们只简单介绍常用的两种输入流，其他输入流的概念较为复杂，这里就不多说。</p>
-<h1 id="OutputStream中的写入数据的方法"><a href="#OutputStream中的写入数据的方法" class="headerlink" title="OutputStream中的写入数据的方法"></a>OutputStream中的写入数据的方法</h1><table>
+<h1 id="OutputStream中的写入数据的方法"><a href="#OutputStream中的写入数据的方法" class="headerlink" title="OutputStream中的写入数据的方法"></a>OutputStream中的写入数据的方法</h1><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>序号</th>
@@ -554,6 +557,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>&emsp;&emsp;方法的详细信息请参考<a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh/java/io/OutputStream.html" target="_blank" rel="noopener">API</a>。</p>
 <h1 id="OutputStream代码演示"><a href="#OutputStream代码演示" class="headerlink" title="OutputStream代码演示"></a>OutputStream代码演示</h1><h2 id="字节数组输出流ByteArrayOutputStreamd代码演示"><a href="#字节数组输出流ByteArrayOutputStreamd代码演示" class="headerlink" title="字节数组输出流ByteArrayOutputStreamd代码演示"></a>字节数组输出流ByteArrayOutputStreamd代码演示</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    ByteArrayOutputStream bs = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">    String s = <span class="string">"test OutputStream"</span>;</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = s.getBytes();</span><br><span class="line">    bs.write(bytes); <span class="comment">//将指定的byte数组写到字节数组输出流中</span></span><br><span class="line">    System.out.println(bs.toString());<span class="comment">//将字节数组输出流内容转换成字符串输出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果为：test OutputStream</p>

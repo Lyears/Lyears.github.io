@@ -474,6 +474,7 @@
 <h1 id="URL类方法"><a href="#URL类方法" class="headerlink" title="URL类方法"></a>URL类方法</h1><ul>
 <li>在java.net包中定义了URL类，该类用来处理有关URL的内容。对于URL类的创建和使用，下面分别进行介绍。</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -500,9 +501,11 @@
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li>URL类中包含了很多方法用于访问URL的各个部分，具体方法及描述如下：</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -557,6 +560,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h1 id="URL类方法实例"><a href="#URL类方法实例" class="headerlink" title="URL类方法实例"></a>URL类方法实例</h1><ul>
 <li>下面用百度主页演示URL类中的方法：</li>
 </ul>
@@ -574,6 +578,7 @@
 <li>等等…</li>
 </ul>
 <p>URLConnections方法列表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -628,6 +633,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h1 id="URLConnections-类方法实例"><a href="#URLConnections-类方法实例" class="headerlink" title="URLConnections 类方法实例"></a>URLConnections 类方法实例</h1><p>下面用百度主页演示URLConnection方法，采用HTTPS协议。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">URL url = <span class="keyword">new</span> URL(<span class="string">"https://www.baidu.com/index.html"</span>);</span><br><span class="line">URLConnection connection = url.openConnection();</span><br><span class="line"></span><br><span class="line">InputStream is = connection.getInputStream();</span><br><span class="line"></span><br><span class="line">BufferedReader buffer = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line"></span><br><span class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">String content ;</span><br><span class="line"><span class="keyword">while</span> ((content=buffer.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">    sb.append(content);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(sb);</span><br></pre></td></tr></table></figure>
 <p>编译运行后，会输出百度首页<code>https://www.baidu.com/index.html</code>的html内容。</p>
