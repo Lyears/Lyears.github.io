@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Object 类equals() 方法 equals()方法是用来判断其他的对象是否和该对象相等.  String 、Math、Integer、Double等这些封装类在使用equals()方法时，已经覆盖了object类的equals()方法。  123456789101112131415161718192021public boolean equals(Object anObject) &amp;#1">
+<meta name="keywords" content="Java 类库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java核心类">
+<meta property="og:url" content="http://yoursite.com/20170915core/index.html">
+<meta property="og:site_name" content="LightYears&#39;s Note">
+<meta property="og:description" content="Object 类equals() 方法 equals()方法是用来判断其他的对象是否和该对象相等.  String 、Math、Integer、Double等这些封装类在使用equals()方法时，已经覆盖了object类的equals()方法。  123456789101112131415161718192021public boolean equals(Object anObject) &amp;#1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-20T04:30:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java核心类">
+<meta name="twitter:description" content="Object 类equals() 方法 equals()方法是用来判断其他的对象是否和该对象相等.  String 、Math、Integer、Double等这些封装类在使用equals()方法时，已经覆盖了object类的equals()方法。  123456789101112131415161718192021public boolean equals(Object anObject) &amp;#1">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/20170915core/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java核心类 | LightYears's Note</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LightYears's Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">LightYears's Blog</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/20170915core/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LightYears">
+      <meta itemprop="description" content="从不浪费时间的人，没有工夫抱怨时间不够。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LightYears's Note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java核心类
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2017-09-15T00:00:00+08:00">2017-09-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2017-10-20 12:30:34" itemprop="dateModified" datetime="2017-10-20T12:30:34+08:00">2017-10-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Object-类"><a href="#Object-类" class="headerlink" title="Object 类"></a>Object 类</h1><h2 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals() 方法"></a>equals() 方法</h2><ul>
+<li>equals()方法是用来判断其他的对象是否和该对象相等. </li>
+<li>String 、Math、Integer、Double等这些封装类在使用equals()方法时，已经覆盖了object类的equals()方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">      String anotherString = (String)anObject;</span><br><span class="line">      <span class="keyword">int</span> n = count;</span><br><span class="line">      <span class="keyword">if</span> (n == anotherString.count) &#123;</span><br><span class="line">        <span class="keyword">char</span> v1[] = value;</span><br><span class="line">        <span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">        <span class="keyword">int</span> i = offset;</span><br><span class="line">        <span class="keyword">int</span> j = anotherString.offset;</span><br><span class="line">        <span class="keyword">while</span> (n– != <span class="number">0</span>) &#123;</span><br><span class="line">              <span class="keyword">if</span> (v1[i++] != v2[j++])</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li>很明显，这是进行的内容比较，而已经不再是地址的比较。依次类推Math、Integer、Double等这些类都是重写了equals()方法的，从而进行的是内容的比较。</li>
+<li>性质<ul>
+<li>自反性（reflexive）。对于任意不为null的引用值x，x.equals(x)一定是true。</li>
+<li>对称性（symmetric）。对于任意不为null的引用值x和y，当且仅当x.equals(y)是true时，y.equals(x)也是true。</li>
+<li>传递性（transitive）。对于任意不为null的引用值x、y和z，如果x.equals(y)是true，同时y.equals(z)是true，那么x.equals(z)一定是true。</li>
+<li>一致性（consistent）。对于任意不为null的引用值x和y，如果用于equals比较的对象信息没有被修改的话，多次调用时x.equals(y)要么一致地返回true要么一致地返回false。</li>
+<li>需要注意的是当equals()方法被override时，hashCode()也要被override。按照一般hashCode()方法的实现来说，相等的对象，它们的hash code一定相等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="hashCode-方法"><a href="#hashCode-方法" class="headerlink" title="hashCode() 方法"></a>hashCode() 方法</h2><ul>
+<li>hashCode()方法给对象返回一个hash code值。这个方法被用于hash tables，例如HashMap。</li>
+<li>Java对象的eqauls方法和hashCode方法是这样规定的：<ol>
+<li>相等（相同）的对象必须具有相等的哈希码（或者散列码）。</li>
+<li>如果两个对象的hashCode相同，它们并不一定相同。</li>
+</ol>
+</li>
+</ul>
+<h1 id="String-类"><a href="#String-类" class="headerlink" title="String 类"></a>String 类</h1><ul>
+<li>构造方法</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1.</td>
+<td>String()</td>
+<td>创建一个空字符串对象</td>
+</tr>
+<tr>
+<td style="text-align:center">2.</td>
+<td>String(byte[] bytes)</td>
+<td>使用一个字节数组来创建一个字符串的对象。</td>
+</tr>
+<tr>
+<td style="text-align:center">3.</td>
+<td>String(byte[] bytes,int offset, int length)</td>
+<td>解码字节数组中指定部分</td>
+</tr>
+<tr>
+<td style="text-align:center">4.</td>
+<td>String(char[] value)</td>
+<td>使用一个字符数组创建一个字符串对象。</td>
+</tr>
+<tr>
+<td style="text-align:center">5.</td>
+<td>String(char[] value,int offset, int length)</td>
+<td>解码字符数组中指定部分</td>
+</tr>
+<tr>
+<td style="text-align:center">6.</td>
+<td>String(int[] codePoints,int offset,int length)</td>
+<td>解码整数数组中指定部分</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>示例</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span> [] bytes =&#123;<span class="number">97</span>,<span class="number">98</span>,<span class="number">99</span>&#125;;</span><br><span class="line">    String hh = <span class="keyword">new</span> String(bytes);</span><br><span class="line">    <span class="comment">//从数组第一位解码，长度为2</span></span><br><span class="line">    String dd= <span class="keyword">new</span> String(bytes,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">      System.out.println(hh);</span><br><span class="line">      System.out.println(dd);</span><br></pre></td></tr></table></figure>
+<h1 id="StringBuffer类"><a href="#StringBuffer类" class="headerlink" title="StringBuffer类"></a>StringBuffer类</h1><ul>
+<li>定义：由于String的内容是不可变的，一旦修改马上会创建一个对象，所以为了避免导致String对象泛滥，在频繁改变字符串对象的应用中，需要使用可变的字符串缓冲区类。</li>
+<li>实质：StringBuffer底层是一个字符串数组，默认缓冲区的容量是16。如果字符串的长度不够，内存将自动 <strong>增长一倍</strong>，线程安全的所有的缓冲区操作方法都是同步的。效率很低。</li>
+</ul>
+<h1 id="System类"><a href="#System类" class="headerlink" title="System类"></a>System类</h1><ul>
+<li><p>作用：获取系统属性</p>
+</li>
+<li><p>类中所有成员都是静态的，当要引用这些变量和方法的时候，System.属性 System.方法()</p>
+</li>
+<li>常用的方法：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1.</td>
+<td>arraycopy(Object src,int srcPro,Object dest,int destPro，int length)</td>
+<td>(源数组，源数组中的起始位置，目标数组，目标数组的起始位置，要复制数组的长度)</td>
+</tr>
+<tr>
+<td style="text-align:center">2.</td>
+<td>currentTimesMillis()</td>
+<td>获取系统时间</td>
+</tr>
+<tr>
+<td style="text-align:center">3.</td>
+<td>exit(int status)</td>
+<td>0:正常退出jvm  1：异常退出</td>
+</tr>
+<tr>
+<td style="text-align:center">4.</td>
+<td>gc()</td>
+<td>建议jvm启动垃圾回收器回收垃圾</td>
+</tr>
+<tr>
+<td style="text-align:center">5.</td>
+<td>getenv(String name)</td>
+<td>根据环境变量名获取环境变量</td>
+</tr>
+<tr>
+<td style="text-align:center">6.</td>
+<td>String getProperty(String name)</td>
+<td>获取某个系统属性</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Runtime类"><a href="#Runtime类" class="headerlink" title="Runtime类"></a>Runtime类</h1><ul>
+<li>作用：该类描述当前应用程序的运行环境，一个应用程序只有一个运行环境</li>
+<li>常用的方法：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td>getRuntime()</td>
+<td>返回当前应用程序的运行环境对象。</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td>exec(String command)</td>
+<td>根据指定的路径执行对应的执行文件。</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td>freeMemory()</td>
+<td>返回jvm中的空闲内存。（以字节为单位）</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td>maxMemory()</td>
+<td>返回jvm中试图管理的最大内存</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td>totalMemory()</td>
+<td>返回jvm中内存总量</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>示例代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Runtime runtime = Runtime.getRuntime();</span><br><span class="line">       Process process = runtime.exec(<span class="string">"C:\\Windows\\notepad.exe"</span>);</span><br><span class="line">       <span class="comment">//Thread.sleep(3000);</span></span><br><span class="line">       process.destroy();</span><br><span class="line">       System.out.println(runtime.freeMemory());</span><br><span class="line">       System.out.println(runtime.maxMemory());</span><br><span class="line">       System.out.println(runtime.totalMemory());</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h1><ul>
+<li>常用的方法：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td>abs(double num)</td>
+<td>取绝对值</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td>ceil(double num)</td>
+<td>向上取整</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td>floor(double num)</td>
+<td>向下取整</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td>round(double num)</td>
+<td>四舍五入</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td>random（）</td>
+<td>产生大于等于0.0 小于1.0的随机数Random 类可产生各种随机数</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-类库/" rel="tag"># Java 类库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20170915Java IO/" rel="next" title="Java IO 工作机制(转)">
+                <i class="fa fa-chevron-left"></i> Java IO 工作机制(转)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20170915packing/" rel="prev" title="Java 包装类详解">
+                Java 包装类详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="LightYears">
+            
+              <p class="site-author-name" itemprop="name">LightYears</p>
+              <div class="site-description motion-element" itemprop="description">从不浪费时间的人，没有工夫抱怨时间不够。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Lyears" title="GitHub &rarr; https://github.com/Lyears" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://juejin.im/user/58f56f8ea22b9d006c06f42d" title="掘金 &rarr; https://juejin.im/user/58f56f8ea22b9d006c06f42d" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>掘金</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Object-类"><span class="nav-number">1.</span> <span class="nav-text">Object 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-方法"><span class="nav-number">1.1.</span> <span class="nav-text">equals() 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashCode-方法"><span class="nav-number">1.2.</span> <span class="nav-text">hashCode() 方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String-类"><span class="nav-number">2.</span> <span class="nav-text">String 类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StringBuffer类"><span class="nav-number">3.</span> <span class="nav-text">StringBuffer类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System类"><span class="nav-number">4.</span> <span class="nav-text">System类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Runtime类"><span class="nav-number">5.</span> <span class="nav-text">Runtime类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Math类"><span class="nav-number">6.</span> <span class="nav-text">Math类</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LightYears</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
