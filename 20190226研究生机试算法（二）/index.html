@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="LightYears&#39;s Note">
 <meta property="og:description" content="研究生机试算法(二)&amp;emsp;&amp;emsp;本文接上一篇研究生机试算法。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-06T08:35:14.307Z">
+<meta property="og:updated_time" content="2019-03-10T13:47:14.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="研究生机试算法(二)">
 <meta name="twitter:description" content="研究生机试算法(二)&amp;emsp;&amp;emsp;本文接上一篇研究生机试算法。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。">
@@ -449,22 +449,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-06 16:35:14" itemprop="dateModified" datetime="2019-03-06T16:35:14+08:00">2019-03-06</time>
-              
-            
           </span>
 
           
@@ -577,7 +561,7 @@ C_n^m&=\frac{n!}{m!(n-m)!} \\
 &=\frac{\frac{\frac{(n-m+1)×(n-m+2)}{2}×…}{…}×(n-m+m)}{m}
 \end{aligned}
 \end{equation}</script><p>&emsp;&emsp;这样，就可以写出相应的代码了，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n, <span class="keyword">long</span> <span class="keyword">long</span> m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">        ans = ans * (n - m + <span class="number">1</span>) / i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n, <span class="keyword">long</span> <span class="keyword">long</span> m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">        ans = ans * (n - m + i) / i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -600,7 +584,7 @@ C_n^m&=\frac{n!}{m!(n-m)!} \\
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/算法/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
           
         </div>
       
@@ -835,7 +819,7 @@ C_n^m&=\frac{n!}{m!(n-m)!} \\
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
