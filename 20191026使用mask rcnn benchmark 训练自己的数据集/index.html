@@ -145,24 +145,25 @@
 
 
 
-  <meta name="description" content="关于我努力在学习，不敢松懈。 因为， 眉毛上的汗水，眉毛下的泪水，你总得选一样。 From LightYears QQ：805106298 E-mail：805106298@qq.com">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://lyears.github.io/about/index.html">
+  <meta name="description" content="介绍&amp;emsp;&amp;emsp;Facebook AI Research 开源了 Faster R-CNN 和 Mask R-CNN 的 PyTorch 1.0 实现框架：MaskRCNN-Benchmark。他的性能相对更快，并且占用更少的 GPU 内存，它的亮点如下：  PyTorch 1.0: 相当或者超越 Detectron 准确率的 RPN、Faster R-CNN 和 Mask R-CNN">
+<meta name="keywords" content="深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Mask-RCNN Benchmark 训练自定义数据集">
+<meta property="og:url" content="https://lyears.github.io/20191026使用mask rcnn benchmark 训练自己的数据集/index.html">
 <meta property="og:site_name" content="LightYears&#39;s Note">
-<meta property="og:description" content="关于我努力在学习，不敢松懈。 因为， 眉毛上的汗水，眉毛下的泪水，你总得选一样。 From LightYears QQ：805106298 E-mail：805106298@qq.com">
+<meta property="og:description" content="介绍&amp;emsp;&amp;emsp;Facebook AI Research 开源了 Faster R-CNN 和 Mask R-CNN 的 PyTorch 1.0 实现框架：MaskRCNN-Benchmark。他的性能相对更快，并且占用更少的 GPU 内存，它的亮点如下：  PyTorch 1.0: 相当或者超越 Detectron 准确率的 RPN、Faster R-CNN 和 Mask R-CNN">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-31T09:09:49.096Z">
+<meta property="og:updated_time" content="2019-11-29T15:57:50.431Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="关于我努力在学习，不敢松懈。 因为， 眉毛上的汗水，眉毛下的泪水，你总得选一样。 From LightYears QQ：805106298 E-mail：805106298@qq.com">
+<meta name="twitter:title" content="使用 Mask-RCNN Benchmark 训练自定义数据集">
+<meta name="twitter:description" content="介绍&amp;emsp;&amp;emsp;Facebook AI Research 开源了 Faster R-CNN 和 Mask R-CNN 的 PyTorch 1.0 实现框架：MaskRCNN-Benchmark。他的性能相对更快，并且占用更少的 GPU 内存，它的亮点如下：  PyTorch 1.0: 相当或者超越 Detectron 准确率的 RPN、Faster R-CNN 和 Mask R-CNN">
 
 
 
 
 
 
-  <link rel="canonical" href="https://lyears.github.io/about/">
+  <link rel="canonical" href="https://lyears.github.io/20191026使用mask rcnn benchmark 训练自己的数据集/">
 
 
 
@@ -172,7 +173,7 @@
   };
 </script>
 
-  <title>about | LightYears's Note</title>
+  <title>使用 Mask-RCNN Benchmark 训练自定义数据集 | LightYears's Note</title>
   
 
 
@@ -279,7 +280,7 @@
         
         
           
-          <li class="menu-item menu-item-about menu-item-active">
+          <li class="menu-item menu-item-about">
 
     
     
@@ -381,78 +382,267 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lyears.github.io/20191026使用mask rcnn benchmark 训练自己的数据集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LightYears">
+      <meta itemprop="description" content="从不浪费时间的人，没有工夫抱怨时间不够。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LightYears's Note">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">about
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>努力在学习，不敢松懈。</p>
-<p>因为， 眉毛上的汗水，眉毛下的泪水，你总得选一样。</p>
-<p>From LightYears</p>
-<p>QQ：805106298</p>
-<p>E-mail：805106298@qq.com</p>
+          <h1 class="post-title" itemprop="name headline">使用 Mask-RCNN Benchmark 训练自定义数据集
 
+              
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-26 00:00:00" itemprop="dateCreated datePublished" datetime="2019-10-26T00:00:00+08:00">2019-10-26</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">880</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>&emsp;&emsp;Facebook AI Research 开源了 Faster R-CNN 和 Mask R-CNN 的 PyTorch 1.0 实现框架：MaskRCNN-Benchmark。他的性能相对更快，并且占用更少的 GPU 内存，它的亮点如下：</p>
+<ul>
+<li>PyTorch 1.0: 相当或者超越 Detectron 准确率的 RPN、Faster R-CNN 和 Mask R-CNN 的实现；</li>
+<li>非常快: 训练速度是 Detectron 的两倍，是 mmdection 的 1.3 倍。</li>
+<li>节省内存: 在训练过程中使用的 GPU 内存比 mmdetection 少大约 500MB；</li>
+<li>使用多 GPU 训练和推理；</li>
+<li>批量化推理:可以在每 GPU 每批量上使用多张图像进行推理；</li>
+<li>支持 CPU inference: 可以在 CPU 上运行。</li>
+<li>提供几乎所有参考 Mask R-CNN 和 Faster R-CNN 配置的预训练模型，具有 1x 的 schedule。</li>
+</ul>
+<p>&emsp;&emsp;这篇文章主要是记录我使用 Mask R-CNN benchmark 框架训练自定义数据集的过程，总的来说还是比较容易上手的，当然也有一些问题出现。下面便是使用的情况。</p>
+<a id="more"></a>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><em>我的开发环境如下:</em></p>
+<ul>
+<li>系统: Ubuntu 18.04LTS</li>
+<li>Python 环境: miniconda3<ul>
+<li>Python 3.7.4</li>
+</ul>
+</li>
+<li>GCC: 7.3.0</li>
+<li>CUDA: 10.0</li>
+</ul>
+<p><em>项目的要求如下:</em></p>
+<ul>
+<li>PyTorch 1.0 from a nightly release. It will not work with 1.0 nor 1.0.1. Installation instructions can be found in <a href="https://pytorch.org/get-started/locally/" target="_blank" rel="noopener">https://pytorch.org/get-started/locally/</a></li>
+<li>torchvision from master</li>
+<li>cocoapi</li>
+<li>yacs</li>
+<li>matplotlib</li>
+<li>GCC &gt;= 4.9</li>
+<li>OpenCV</li>
+<li>CUDA &gt;= 9.0</li>
+</ul>
+
       
     </div>
+
     
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
 
 
 
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>LightYears</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
     
+    <a href="https://lyears.github.io/20191026使用mask rcnn benchmark 训练自己的数据集/" title="使用 Mask-RCNN Benchmark 训练自定义数据集">https://lyears.github.io/20191026使用mask rcnn benchmark 训练自己的数据集/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
     
-    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"><i class="fa fa-tag"></i> 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20190226研究生机试算法（二）/" rel="next" title="研究生机试算法(二)">
+                <i class="fa fa-chevron-left"></i> 研究生机试算法(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -632,7 +822,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我"><span class="nav-number">1.</span> <span class="nav-text">关于我</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li></ol></div>
             
 
           </div>
@@ -842,6 +1032,53 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
   
 
 

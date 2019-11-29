@@ -145,18 +145,18 @@
 
 
 
-  <meta name="description" content="研究生机试算法(二)&amp;emsp;&amp;emsp;本文接上一篇研究生机试算法。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。">
+  <meta name="description" content="&amp;emsp;&amp;emsp;本文接上一篇研究生机试算法。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="研究生机试算法(二)">
 <meta property="og:url" content="https://lyears.github.io/20190226研究生机试算法（二）/index.html">
 <meta property="og:site_name" content="LightYears&#39;s Note">
-<meta property="og:description" content="研究生机试算法(二)&amp;emsp;&amp;emsp;本文接上一篇研究生机试算法。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本文接上一篇研究生机试算法。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-11T15:26:37.884Z">
+<meta property="og:updated_time" content="2019-11-29T16:09:12.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="研究生机试算法(二)">
-<meta name="twitter:description" content="研究生机试算法(二)&amp;emsp;&amp;emsp;本文接上一篇研究生机试算法。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本文接上一篇研究生机试算法。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。">
 
 
 
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.2k</span>
+                <span title="本文字数">5.1k</span>
               
 
               
@@ -526,9 +526,9 @@
       
 
       
-        <h1 id="研究生机试算法-二"><a href="#研究生机试算法-二" class="headerlink" title="研究生机试算法(二)"></a>研究生机试算法(二)</h1><p>&emsp;&emsp;本文接上一篇<a href="/20190222研究生机试算法/">研究生机试算法</a>。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。</p>
+        <p>&emsp;&emsp;本文接上一篇<a href="/20190222研究生机试算法/">研究生机试算法</a>。在讨论完几个经典入门算法后，我们来开始系统地学习研究生机试算法。</p>
 <a id="more"></a>
-<h2 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h2><ul>
+<h1 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h1><ul>
 <li><p>当我们遇到诸如求最大公约数、最小公倍数之类的数学问题时，大多数人第一时间会想到暴力枚举求解，因为我们并没有系统地学习过这方面的数学知识。所以，当我们查阅资料，我们可以发现，使用欧几里得算法可以使算法更加高效。过程如下：</p>
 <blockquote>
 <p>若a,b全为零，则它们的最大公约数不存在；若a、b其中之一为零，则它们的最大公约数为a、b中非零的那个；若a、b都不为零，则使新a=b;新b=a%b，然后重复该过程。</p>
@@ -539,20 +539,20 @@
 <p>这就是求最大公约数的算法，同样也可以使用非递归形式。</p>
 </li>
 </ul>
-<h2 id="最小公倍数"><a href="#最小公倍数" class="headerlink" title="最小公倍数"></a>最小公倍数</h2><ul>
+<h1 id="最小公倍数"><a href="#最小公倍数" class="headerlink" title="最小公倍数"></a>最小公倍数</h1><ul>
 <li>a、b的最小公倍数为<code>a*b/k</code>，k为a、b的最大公倍数，因此可以使用上述算法求解。</li>
 </ul>
-<h2 id="高精度整数"><a href="#高精度整数" class="headerlink" title="高精度整数"></a>高精度整数</h2><ul>
+<h1 id="高精度整数"><a href="#高精度整数" class="headerlink" title="高精度整数"></a>高精度整数</h1><ul>
 <li>如果计算的数据大于int(long)所能表示的最大范围，那么我们需要使用高精度整数类BigInteger，它里面内置了四则运算的API，只要考前查阅即可。</li>
 </ul>
-<h2 id="分解质因数"><a href="#分解质因数" class="headerlink" title="分解质因数"></a>分解质因数</h2><ul>
+<h1 id="分解质因数"><a href="#分解质因数" class="headerlink" title="分解质因数"></a>分解质因数</h1><ul>
 <li><p>顾名思义，对一个数<code>x</code> 分解质因数即确定素数$p_1p_2p_3$，使其满足<script type="math/tex">x = p_1^ {e_1} * p_2 ^ {e_2} * … * p_3 ^ {e_3}</script>，在特定条件下我们还要确定$e_1、e_2$等幂指数。</p>
 </li>
 <li><p>我们来看一道求质因数的个数的题（2007年清华大学研究生机试题），要求我们求出一个正整数N的质因数的个数，（1&lt;N&lt;10^9）。</p>
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.algorithm.math;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> fzm</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-02-23</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NumOfPrime</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span>[] mark = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">31623</span>];</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] prime = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">31623</span>];<span class="comment">//定义一个sqrt(10^9)大小的数组，保存质数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> primeSize = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        init();</span><br><span class="line">        String str;</span><br><span class="line">        BufferedReader bf = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">        <span class="keyword">while</span> ((str = bf.readLine())!= <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> n = Integer.parseInt(str);</span><br><span class="line">            out(n);</span><br><span class="line">        &#125;</span><br><span class="line">        bf.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        List&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;();</span></span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; primeSize; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (n % prime[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">while</span> (n % prime[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                    res++;<span class="comment">//每一个能整除的质数，都使结果+1</span></span><br><span class="line">                    n /= prime[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n != <span class="number">1</span>) res++;<span class="comment">//如果在范围内的质数都不能除尽该数，则证明在该范围内还存在一个质因数</span></span><br><span class="line"></span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化质数数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">31622</span>; i++) &#123;</span><br><span class="line">            mark[i] = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">31622</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mark[i]) <span class="keyword">continue</span>;</span><br><span class="line">            prime[primeSize++] = i;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i * i; j &lt;= <span class="number">31622</span>; j += i) &#123;</span><br><span class="line">                mark[j] = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="组合数"><a href="#组合数" class="headerlink" title="组合数"></a>组合数</h2><h3 id="关于n-的问题"><a href="#关于n-的问题" class="headerlink" title="关于n!的问题"></a>关于n!的问题</h3><ul>
+<h1 id="组合数"><a href="#组合数" class="headerlink" title="组合数"></a>组合数</h1><h2 id="关于n-的问题"><a href="#关于n-的问题" class="headerlink" title="关于n!的问题"></a>关于n!的问题</h2><ul>
 <li><p>n!表示n的阶乘，并且有<code>n!=1 * 2 * 3 * … * n</code>成立，我们讨论一下关于它的问题，求n!中有多少个质因子p。如果我们先求n!在按上述计算，那么数据可能非常大，根本无法计算出来，因此我们需要更快的解。</p>
 </li>
 <li><p>我们以10!为例，显然其中有因子2的个数为5，$2^2$的个数为2，$2^3$的个数为1，因此共有8个质因子2。仔细思考变可以发现此过程可以推广为<em>n!</em>中有$(\frac{n}{p}+\frac{n}{p^2}+\frac{n}{p^3}+…)$个质因子p，其中除法均为向下取整。于是便得到了O(logn)算法，代码如下：</p>
@@ -561,7 +561,7 @@
 <li><p>利用这个算法，可以很快计算出<em>n!</em>的末尾有多少个零，只要带入<code>cal(n, 5)</code>即可。</p>
 </li>
 </ul>
-<h3 id="组合数的计算"><a href="#组合数的计算" class="headerlink" title="组合数的计算"></a>组合数的计算</h3><ul>
+<h2 id="组合数的计算"><a href="#组合数的计算" class="headerlink" title="组合数的计算"></a>组合数的计算</h2><ul>
 <li><p>组合数$C_n^m$是指从n个不同元素中选出m个元素的方案数（m≤n），其定义式为$C_n^m=\frac{n!}{m!(n-m)!}$，由三个整数的阶乘得到。通过定义可以知道，组合数满足$C_n^m=C_n^{n-m}$，且有$C_n^0=C_n^n=1$成立。本节讨论如下两个问题：</p>
 <ol>
 <li>如何计算$C_n^m$。</li>
@@ -569,17 +569,17 @@
 </ol>
 </li>
 </ul>
-<h4 id="第一个问题"><a href="#第一个问题" class="headerlink" title="第一个问题"></a>第一个问题</h4><h5 id="方法一：定义法"><a href="#方法一：定义法" class="headerlink" title="方法一：定义法"></a>方法一：定义法</h5><ul>
+<h3 id="第一个问题"><a href="#第一个问题" class="headerlink" title="第一个问题"></a>第一个问题</h3><h4 id="方法一：定义法"><a href="#方法一：定义法" class="headerlink" title="方法一：定义法"></a>方法一：定义法</h4><ul>
 <li>通过定义式来算，先求阶乘，再除法，这样阶乘相当庞大，因此只能接受50以内的计算。</li>
 </ul>
-<h5 id="方法二：递推"><a href="#方法二：递推" class="headerlink" title="方法二：递推"></a>方法二：递推</h5><ul>
+<h4 id="方法二：递推"><a href="#方法二：递推" class="headerlink" title="方法二：递推"></a>方法二：递推</h4><ul>
 <li>我们可以得到组合数的递推公式：</li>
 </ul>
 <script type="math/tex; mode=display">\begin{equation}
 C_n^m = C_{n-1}^m + C_{n-1}^{m-1}
 \end{equation}​</script><p>&emsp;&emsp;从直观上看，公式总是把n减一，而把m保持原样或减一，这样这个递推公式最终总可以把n和m变成相同或是让m变为0，而又有$C_n^0=C_n^n=1$,这正好可以作为递归边界。代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n, <span class="keyword">long</span> <span class="keyword">long</span> m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(m == <span class="number">0</span> || m == n) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> C(n - <span class="number">1</span>, m) + C(n - <span class="number">1</span>, m - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="方法三：定义式变形"><a href="#方法三：定义式变形" class="headerlink" title="方法三：定义式变形"></a>方法三：定义式变形</h5><ul>
+<h4 id="方法三：定义式变形"><a href="#方法三：定义式变形" class="headerlink" title="方法三：定义式变形"></a>方法三：定义式变形</h4><ul>
 <li>我们观察该式：</li>
 </ul>
 <script type="math/tex; mode=display">\begin{equation}
@@ -590,10 +590,10 @@ C_n^m&=\frac{n!}{m!(n-m)!} \\
 \end{aligned}
 \end{equation}​</script><p>&emsp;&emsp;这样，就可以写出相应的代码了，代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n, <span class="keyword">long</span> <span class="keyword">long</span> m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">        ans = ans * (n - m + i) / i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="第二个问题"><a href="#第二个问题" class="headerlink" title="第二个问题"></a>第二个问题</h4><h5 id="方法一：递推取模"><a href="#方法一：递推取模" class="headerlink" title="方法一：递推取模"></a>方法一：递推取模</h5><ul>
+<h3 id="第二个问题"><a href="#第二个问题" class="headerlink" title="第二个问题"></a>第二个问题</h3><h4 id="方法一：递推取模"><a href="#方法一：递推取模" class="headerlink" title="方法一：递推取模"></a>方法一：递推取模</h4><ul>
 <li>这种方法基于第一个问题的方法二，是最容易实现的一种。只要在原先的基础上适当的得房对p取模即可。</li>
 </ul>
-<h5 id="方法二：卢卡斯定理"><a href="#方法二：卢卡斯定理" class="headerlink" title="方法二：卢卡斯定理"></a>方法二：卢卡斯定理</h5><ul>
+<h4 id="方法二：卢卡斯定理"><a href="#方法二：卢卡斯定理" class="headerlink" title="方法二：卢卡斯定理"></a>方法二：卢卡斯定理</h4><ul>
 <li>如果p是素数，将m和n表示为p进制：</li>
 </ul>
 <script type="math/tex; mode=display">
@@ -681,6 +681,10 @@ n&=8=1×5^1+3
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/20191026使用mask rcnn benchmark 训练自己的数据集/" rel="prev" title="使用 Mask-RCNN Benchmark 训练自定义数据集">
+                使用 Mask-RCNN Benchmark 训练自定义数据集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -750,7 +754,7 @@ n&=8=1×5^1+3
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -810,7 +814,9 @@ n&=8=1×5^1+3
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -872,7 +878,7 @@ n&=8=1×5^1+3
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#研究生机试算法-二"><span class="nav-number">1.</span> <span class="nav-text">研究生机试算法(二)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最大公约数"><span class="nav-number">1.1.</span> <span class="nav-text">最大公约数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小公倍数"><span class="nav-number">1.2.</span> <span class="nav-text">最小公倍数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高精度整数"><span class="nav-number">1.3.</span> <span class="nav-text">高精度整数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分解质因数"><span class="nav-number">1.4.</span> <span class="nav-text">分解质因数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合数"><span class="nav-number">1.5.</span> <span class="nav-text">组合数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于n-的问题"><span class="nav-number">1.5.1.</span> <span class="nav-text">关于n!的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合数的计算"><span class="nav-number">1.5.2.</span> <span class="nav-text">组合数的计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一个问题"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">第一个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法一：定义法"><span class="nav-number">1.5.2.1.1.</span> <span class="nav-text">方法一：定义法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法二：递推"><span class="nav-number">1.5.2.1.2.</span> <span class="nav-text">方法二：递推</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法三：定义式变形"><span class="nav-number">1.5.2.1.3.</span> <span class="nav-text">方法三：定义式变形</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二个问题"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">第二个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法一：递推取模"><span class="nav-number">1.5.2.2.1.</span> <span class="nav-text">方法一：递推取模</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法二：卢卡斯定理"><span class="nav-number">1.5.2.2.2.</span> <span class="nav-text">方法二：卢卡斯定理</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最大公约数"><span class="nav-number">1.</span> <span class="nav-text">最大公约数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最小公倍数"><span class="nav-number">2.</span> <span class="nav-text">最小公倍数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高精度整数"><span class="nav-number">3.</span> <span class="nav-text">高精度整数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分解质因数"><span class="nav-number">4.</span> <span class="nav-text">分解质因数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组合数"><span class="nav-number">5.</span> <span class="nav-text">组合数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于n-的问题"><span class="nav-number">5.1.</span> <span class="nav-text">关于n!的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合数的计算"><span class="nav-number">5.2.</span> <span class="nav-text">组合数的计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个问题"><span class="nav-number">5.2.1.</span> <span class="nav-text">第一个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一：定义法"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">方法一：定义法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二：递推"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">方法二：递推</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法三：定义式变形"><span class="nav-number">5.2.1.3.</span> <span class="nav-text">方法三：定义式变形</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二个问题"><span class="nav-number">5.2.2.</span> <span class="nav-text">第二个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一：递推取模"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">方法一：递推取模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二：卢卡斯定理"><span class="nav-number">5.2.2.2.</span> <span class="nav-text">方法二：卢卡斯定理</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -907,7 +913,7 @@ n&=8=1×5^1+3
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">90k</span>
+    <span title="站点总字数">91k</span>
   
 
   
