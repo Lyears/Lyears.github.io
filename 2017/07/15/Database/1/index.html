@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
+  <link rel="mask-icon" href="/images/logo-128.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|DejaVu Sans Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-circle.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="四大特性原子性&amp;emsp;&amp;emsp;表示组成一个事务的多个数据库操作是一个不可分割的原子单元，只有所有###操作执行成功，整个事务才提交。事务中的任何一个数据库操作失败，已经执行的任何操作都必须撤销，让数据库返回到初始状态。">
+<meta name="keywords" content="事务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库事务">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2017&#x2F;07&#x2F;15&#x2F;Database&#x2F;1&#x2F;index.html">
+<meta property="og:site_name" content="LightYears&#39;s Note">
+<meta property="og:description" content="四大特性原子性&amp;emsp;&amp;emsp;表示组成一个事务的多个数据库操作是一个不可分割的原子单元，只有所有###操作执行成功，整个事务才提交。事务中的任何一个数据库操作失败，已经执行的任何操作都必须撤销，让数据库返回到初始状态。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-05T16:59:23.107Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/07/15/Database/1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>数据库事务 | LightYears's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LightYears's Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">LightYears's Blog</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Lyears" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/15/Database/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LightYears">
+      <meta itemprop="description" content="Computer Science and Technology major, research direction is Computer Vision.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LightYears's Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据库事务
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-15 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-15T00:00:00+08:00">2017-07-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/07/15/Database/1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/07/15/Database/1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="四大特性"><a href="#四大特性" class="headerlink" title="四大特性"></a>四大特性</h1><h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><p>&emsp;&emsp;表示组成一个事务的多个数据库操作是一个不可分割的原子单元，只有所有###操作执行成功，整个事务才提交。事务中的任何一个数据库操作失败，已经执行的任何操作都必须撤销，让数据库返回到初始状态。<br>     <a id="more"></a></p>
+<h2 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h2><p>&emsp;&emsp;事务操作成功后，数据库所处的状态和它的业务规则是一致的，即数据库不会破坏。如从A账户转账100元到B账户，不管操作成功与否，A账户和B账户的存款总额是不变的。</p>
+<h2 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h2><p>&emsp;&emsp;在并发数据操作时，不同的事务拥有各自的数据空间，它们的操作不会对对方产生干扰。准确地说，并非要求做到完全无干扰，数据库规定了多种事务的隔离级别，不同的隔离级别对应不同的干扰程度，隔离级别越高，数据一致性越好，但并发性越弱。</p>
+<h2 id="持久性"><a href="#持久性" class="headerlink" title="持久性"></a>持久性</h2><p>&emsp;&emsp;一旦事务提交成功后，事务中所有的数据操作都必须被持久化到数据库中。即使在提交事务后，数据库马上崩溃，在数据库重启时，也必须保证能够通过某种机制恢复数据。</p>
+<h1 id="数据库并发问题"><a href="#数据库并发问题" class="headerlink" title="数据库并发问题"></a>数据库并发问题</h1><p>&emsp;&emsp;一个数据库可能拥有多个访问客户端，这些客户端都可用并发的方式访问数据库。数据库中的相同数据可能同时被多个事务访问，如果没有采取必要的隔离措施，就会导致各种并发问题，破坏数据的完整性。这些问题可用归结为5类。</p>
+<h2 id="脏读-dirty-read"><a href="#脏读-dirty-read" class="headerlink" title="脏读(dirty read)"></a>脏读(dirty read)</h2><p>&emsp;&emsp;A事务读取B事务尚未提交的更改数据，并在这个数据的基础上进行操作。如果恰巧B事务回滚，那么A事务读到的数据根本是不被承认的。来看取款事务和转账事务并发时引发的脏读场景。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时&emsp;间</th>
+<th>取款事务A</th>
+<th>转账事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">T1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T2</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T3</td>
+<td></td>
+<td>查询账户余额为1000元</td>
+</tr>
+<tr>
+<td style="text-align:center">T4</td>
+<td></td>
+<td>取出500元，把余额改为500元</td>
+</tr>
+<tr>
+<td style="text-align:center">T5</td>
+<td>查询账户余额为500元(脏读)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T6</td>
+<td></td>
+<td>撤销事务，余额恢复为1000元</td>
+</tr>
+<tr>
+<td style="text-align:center">T7</td>
+<td>汇入100元，把余额改为600元</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T8</td>
+<td>提交事务</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&emsp;&emsp;在这个场景中，B希望取款500元，而后又撤销了动作，而A往相同的账户中转账100元,就因为A事务读取了B事务尚未提交的数据，而造成账户白白丢失了500元。在Oracle数据库中，不会发生脏读。</p>
+<h2 id="不可重复读-unrepeatable-read"><a href="#不可重复读-unrepeatable-read" class="headerlink" title="不可重复读(unrepeatable read)"></a>不可重复读(unrepeatable read)</h2><p>&emsp;&emsp;不可重复读是指A事务读取了B事务已经提交的更改数据。假设A在取款事务的过程中，B往该账户转账100元，A两次读取账户的余额不一致。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时&emsp;间</th>
+<th>取款事务A</th>
+<th>转账事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">T1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T2</td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T3</td>
+<td></td>
+<td>查询账户余额为1000元</td>
+</tr>
+<tr>
+<td style="text-align:center">T4</td>
+<td>查询账户余额为1000元</td>
+</tr>
+<tr>
+<td style="text-align:center">T5</td>
+<td></td>
+<td>取出100元，把余额改为900元</td>
+</tr>
+<tr>
+<td style="text-align:center">T6</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T7</td>
+<td>查询账户余额为900元(和T4读取的不一致)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="幻想读-phantom-read"><a href="#幻想读-phantom-read" class="headerlink" title="幻想读(phantom read)"></a>幻想读(phantom read)</h2><p>&emsp;&emsp;A事务读取B事务提交的新增数据，这时A事务将出现幻象读现象。幻象读一般发生在计算统计数据的事务中。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时&emsp;间</th>
+<th>取款事务A</th>
+<th>转账事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">T1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T2</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T3</td>
+<td>统计总存款数为1000元</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T4</td>
+<td></td>
+<td>新增一个事务，存款为100元</td>
+</tr>
+<tr>
+<td style="text-align:center">T5</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T6</td>
+<td>再次统计，结果为10100元(幻象读)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&emsp;&emsp;如果新增的数据刚好满足事务的查询条件，那么这个新数据就进入了事务的视野，因此产生了两次统计结果不一致的情况。<br>&emsp;&emsp;幻想读和不可重复读是两个容易混淆的概念，前者是指读到了其他已经提交事务的新增数据，而后者是指读到了已经提交事务的更改数据(更改或删除)。</p>
+<h2 id="第一类丢失更新-lost-update"><a href="#第一类丢失更新-lost-update" class="headerlink" title="第一类丢失更新(lost update)"></a>第一类丢失更新(lost update)</h2><p>&emsp;&emsp;A事务撤销时，把已经提交的B事务的更新数据覆盖了。这种错误可能造成很严重的问题，通过下面的账户取款转账就可以看出。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时&emsp;间</th>
+<th>取款事务A</th>
+<th>转账事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">T1</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T2</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T3</td>
+<td>查询账户余额为1000元</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T4</td>
+<td></td>
+<td>查询账户余额为1000元</td>
+</tr>
+<tr>
+<td style="text-align:center">T5</td>
+<td></td>
+<td>汇入100元，把余额该为100元</td>
+</tr>
+<tr>
+<td style="text-align:center">T6</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T7</td>
+<td>取出100元，把余额改为900元</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T8</td>
+<td>撤销事务</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T9</td>
+<td>余额恢复为1000元(丢失更新)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A事务在撤销时，“不小心”将B事务的转入金额抹除了。</p>
+<h2 id="第二类丢失更新-second-lost-update"><a href="#第二类丢失更新-second-lost-update" class="headerlink" title="第二类丢失更新(second lost update)"></a>第二类丢失更新(second lost update)</h2><p>&emsp;&emsp;A事务覆盖B事务已经提交的数据，造成B事务所做操作丢失。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时&emsp;间</th>
+<th>取款事务A</th>
+<th>转账事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">T1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T2</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T3</td>
+<td></td>
+<td>查询余额为1000元</td>
+</tr>
+<tr>
+<td style="text-align:center">T4</td>
+<td>查询余额为1000元</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T5</td>
+<td></td>
+<td>取出100元，把余额改为900元</td>
+</tr>
+<tr>
+<td style="text-align:center">T6</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td style="text-align:center">T7</td>
+<td>汇入100元</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T8</td>
+<td>提交事务</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">T9</td>
+<td>把余额改为1100元(丢失更新)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&emsp;&emsp;在上面的例子中，由于支票转账事务覆盖了取款事务对存款余额所做的更新，导致银行最后损失了100元。相反，如果转账事务先提交，那么用户账户将会损失100元。</p>
+<h1 id="数据库锁机制"><a href="#数据库锁机制" class="headerlink" title="数据库锁机制"></a>数据库锁机制</h1><p>&emsp;&emsp;数据库b并发会引发很多问题，在一些场合下有些问题是允许的，但在另一些场合下可能是致命的。数据库通过锁机制解决并发访问的问题。虽然不同的数据库在实现细节上存在差别，但原理基本上是一致的。</p>
+<ul>
+<li>行共享锁定</li>
+<li>行独占锁定</li>
+<li>表共享锁定</li>
+<li>表共享独占锁定</li>
+<li>表独占锁定</li>
+</ul>
+<h1 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h1><p>​&emsp;&emsp;尽管数据库为用户提供了锁的DML操作方式，但直接使用锁管理是非常麻烦的，因此数据库为用户提供了自动锁的机制。只要用户指定会话的事务隔离级别，数据库就会分析事务中的SQL语句，然后自动为事务操作的数据库资源添加合适的锁。<br>&emsp;&emsp;ANSI/ISO SQL92标准定义了4个等级的事务隔离级别，在相同的数据环境下，使用相同的输入，执行相同的工作，根据不同的隔离级别，可能导致不同的结果。</p>
+<ul>
+<li>事务隔离级别分类</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">隔离级别</th>
+<th style="text-align:center">脏读</th>
+<th style="text-align:center">不可重复读</th>
+<th style="text-align:center">幻象读</th>
+<th style="text-align:center">第一类丢失更新</th>
+<th style="text-align:center">第二类丢失更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">READ UNCOMMITED</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">允许</td>
+</tr>
+<tr>
+<td style="text-align:center">READ COMMITTED</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">允许</td>
+</tr>
+<tr>
+<td style="text-align:center">REPEATABLE READ</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+</tr>
+<tr>
+<td style="text-align:center">SERIALIZABLE</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+<td style="text-align:center">不允许</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>  &emsp;&emsp;SQL 92推荐使用REPEATABLE READ以保证数据的读一致性，不过用户可以根据应用的需要选择适合的隔离等级。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>LightYears
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/yoursite.com/2017/07/15/Database/1/" title="数据库事务">http://yoursite.com/2017/07/15/Database/1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%8B%E5%8A%A1/" rel="tag"># 事务</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/12/Linux/2/" rel="next" title="Shell常用命令">
+      Shell常用命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#四大特性"><span class="nav-number">1.</span> <span class="nav-text">四大特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原子性"><span class="nav-number">1.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性"><span class="nav-number">1.2.</span> <span class="nav-text">一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离性"><span class="nav-number">1.3.</span> <span class="nav-text">隔离性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持久性"><span class="nav-number">1.4.</span> <span class="nav-text">持久性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库并发问题"><span class="nav-number">2.</span> <span class="nav-text">数据库并发问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脏读-dirty-read"><span class="nav-number">2.1.</span> <span class="nav-text">脏读(dirty read)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不可重复读-unrepeatable-read"><span class="nav-number">2.2.</span> <span class="nav-text">不可重复读(unrepeatable read)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#幻想读-phantom-read"><span class="nav-number">2.3.</span> <span class="nav-text">幻想读(phantom read)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一类丢失更新-lost-update"><span class="nav-number">2.4.</span> <span class="nav-text">第一类丢失更新(lost update)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二类丢失更新-second-lost-update"><span class="nav-number">2.5.</span> <span class="nav-text">第二类丢失更新(second lost update)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库锁机制"><span class="nav-number">3.</span> <span class="nav-text">数据库锁机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务隔离级别"><span class="nav-number">4.</span> <span class="nav-text">事务隔离级别</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LightYears"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">LightYears</p>
+  <div class="site-description" itemprop="description">Computer Science and Technology major, research direction is Computer Vision.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lyears" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lyears" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58f56f8ea22b9d006c06f42d" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58f56f8ea22b9d006c06f42d" rel="noopener" target="_blank"><i class="fa fa-fw fa-star"></i>掘金</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LightYears</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">78k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:11</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'qfNyGNjeQ4aHPKGEjiusEmJC-gzGzoHsz',
+    appKey: 'nGJGddzMh0uNwMtFzYMP9TJk',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
