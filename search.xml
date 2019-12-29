@@ -932,6 +932,62 @@ n&=8=1×5^1+3
       </tags>
   </entry>
   <entry>
+    <title>Java集合类详解</title>
+    <url>/blog/2017/09/15/Java/5/</url>
+    <content><![CDATA[<h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><p><img data-src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/collection1.png" alt="Collection"><br><img data-src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/collection2.png" alt="Map"></p>
+<a id="more"></a>
+<h1 id="Colleciton接口"><a href="#Colleciton接口" class="headerlink" title="Colleciton接口"></a>Colleciton接口</h1><h2 id="Set和List：继承Collection"><a href="#Set和List：继承Collection" class="headerlink" title="Set和List：继承Collection"></a>Set和List：继承Collection</h2><ul>
+<li>Set和List对比：<ul>
+<li>Set：检索元素效率低下，删除和插入效率高，插入和删除不会引起元素位置改变。</li>
+<li>List：和数组类似，List可以动态增长，查找元素效率高，插入删除元素效率低，因为会引起其他元素位置改变。</li>
+</ul>
+</li>
+<li>Set和List具体子类：<ul>
+<li>Set<ul>
+<li>HashSet：以哈希表的形式存放元素，插入删除速度很快。</li>
+</ul>
+</li>
+<li>List<ul>
+<li>ArrayList：动态数组</li>
+<li>LinkedList：链表、队列、堆栈。</li>
+</ul>
+</li>
+<li><strong>Linked 改快读慢</strong></li>
+<li><strong>Array 读快改慢</strong></li>
+<li><strong>Hash 两者之间</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h1><ul>
+<li>说明：Map 接口不是 Collection 接口的继承。而是从自己的用于维护键-值关联的接口层次结构入手。按定义，Map接口储存一组成对的键-值对象，提供key（键）到value（值）的映射，Map中的key不要求有序，不允许重复。value同样不要求有序，但可以重复。</li>
+<li>我们可以把这个接口方法分成三组操作：改变、查询和提供可选视图。</li>
+<li>改变操作允许您从映射中添加和除去键-值对。键和值都可以为 null。但是，您不能把Map 作为一个键或值添加给自身。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Object <span class="title">put</span><span class="params">(Object key, Object value)</span><span class="comment">//将指定的值与此映射中的指定键关联,返回值是被替换的值。</span></span></span><br><span class="line"><span class="function">Object <span class="title">remove</span><span class="params">(Object key)</span><span class="comment">//如果存在一个键的映射关系，则将其从此映射中移除</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">putAll</span><span class="params">(Map mapping)</span><span class="comment">//从指定映射中将所有映射关系复制到此映射中</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span><span class="comment">// 从此映射中移除所有映射关系</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询操作允许您检查映射内容：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Object <span class="title">get</span><span class="params">(Object key)</span><span class="comment">//返回指定键所映射的值；如果此映射不包含该键的映射关系，则返回 null</span></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsKey</span><span class="params">(Object key)</span><span class="comment">//如果此映射包含指定键的映射关系，则返回 true</span></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsValue</span><span class="params">(Object value)</span><span class="comment">//如果此映射将一个或多个键映射到指定值，则返回 true。</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span><span class="comment">//返回此映射中的键-值映射关系数。</span></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span><span class="comment">//如果此映射未包含键-值映射关系，则返回 true。</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后一组方法允许您把键或值的组作为集合来处理。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Set <span class="title">keySet</span><span class="params">()</span><span class="comment">//映射中键的集合必须是唯一的</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Collection <span class="title">values</span><span class="params">()</span><span class="comment">//映射中值的集合可能不唯一</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Set <span class="title">entrySet</span><span class="params">()</span><span class="comment">//返回一个实现 Map.Entry 接口的元素 Set</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>HashMap 类和 TreeMap 类<ul>
+<li>在Map 中插入、删除和定位元素，HashMap 是最好的选择。</li>
+<li>但如果您要按顺序遍历键，那么TreeMap 会更好。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java 类库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java核心类</title>
     <url>/blog/2017/09/15/Java/4/</url>
     <content><![CDATA[<h1 id="Object-类"><a href="#Object-类" class="headerlink" title="Object 类"></a>Object 类</h1><h2 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals() 方法"></a>equals() 方法</h2><ul>
@@ -1151,62 +1207,6 @@ n&=8=1×5^1+3
 </tbody>
 </table>
 </div>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java 类库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java集合类详解</title>
-    <url>/blog/2017/09/15/Java/5/</url>
-    <content><![CDATA[<h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><p><img data-src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/collection1.png" alt="Collection"><br><img data-src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/collection2.png" alt="Map"></p>
-<a id="more"></a>
-<h1 id="Colleciton接口"><a href="#Colleciton接口" class="headerlink" title="Colleciton接口"></a>Colleciton接口</h1><h2 id="Set和List：继承Collection"><a href="#Set和List：继承Collection" class="headerlink" title="Set和List：继承Collection"></a>Set和List：继承Collection</h2><ul>
-<li>Set和List对比：<ul>
-<li>Set：检索元素效率低下，删除和插入效率高，插入和删除不会引起元素位置改变。</li>
-<li>List：和数组类似，List可以动态增长，查找元素效率高，插入删除元素效率低，因为会引起其他元素位置改变。</li>
-</ul>
-</li>
-<li>Set和List具体子类：<ul>
-<li>Set<ul>
-<li>HashSet：以哈希表的形式存放元素，插入删除速度很快。</li>
-</ul>
-</li>
-<li>List<ul>
-<li>ArrayList：动态数组</li>
-<li>LinkedList：链表、队列、堆栈。</li>
-</ul>
-</li>
-<li><strong>Linked 改快读慢</strong></li>
-<li><strong>Array 读快改慢</strong></li>
-<li><strong>Hash 两者之间</strong></li>
-</ul>
-</li>
-</ul>
-<h1 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h1><ul>
-<li>说明：Map 接口不是 Collection 接口的继承。而是从自己的用于维护键-值关联的接口层次结构入手。按定义，Map接口储存一组成对的键-值对象，提供key（键）到value（值）的映射，Map中的key不要求有序，不允许重复。value同样不要求有序，但可以重复。</li>
-<li>我们可以把这个接口方法分成三组操作：改变、查询和提供可选视图。</li>
-<li>改变操作允许您从映射中添加和除去键-值对。键和值都可以为 null。但是，您不能把Map 作为一个键或值添加给自身。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Object <span class="title">put</span><span class="params">(Object key, Object value)</span><span class="comment">//将指定的值与此映射中的指定键关联,返回值是被替换的值。</span></span></span><br><span class="line"><span class="function">Object <span class="title">remove</span><span class="params">(Object key)</span><span class="comment">//如果存在一个键的映射关系，则将其从此映射中移除</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">putAll</span><span class="params">(Map mapping)</span><span class="comment">//从指定映射中将所有映射关系复制到此映射中</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span><span class="comment">// 从此映射中移除所有映射关系</span></span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查询操作允许您检查映射内容：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Object <span class="title">get</span><span class="params">(Object key)</span><span class="comment">//返回指定键所映射的值；如果此映射不包含该键的映射关系，则返回 null</span></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsKey</span><span class="params">(Object key)</span><span class="comment">//如果此映射包含指定键的映射关系，则返回 true</span></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsValue</span><span class="params">(Object value)</span><span class="comment">//如果此映射将一个或多个键映射到指定值，则返回 true。</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span><span class="comment">//返回此映射中的键-值映射关系数。</span></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span><span class="comment">//如果此映射未包含键-值映射关系，则返回 true。</span></span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>最后一组方法允许您把键或值的组作为集合来处理。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Set <span class="title">keySet</span><span class="params">()</span><span class="comment">//映射中键的集合必须是唯一的</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Collection <span class="title">values</span><span class="params">()</span><span class="comment">//映射中值的集合可能不唯一</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Set <span class="title">entrySet</span><span class="params">()</span><span class="comment">//返回一个实现 Map.Entry 接口的元素 Set</span></span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>HashMap 类和 TreeMap 类<ul>
-<li>在Map 中插入、删除和定位元素，HashMap 是最好的选择。</li>
-<li>但如果您要按顺序遍历键，那么TreeMap 会更好。</li>
-</ul>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Java</category>
