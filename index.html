@@ -33,7 +33,7 @@
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: true,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: true,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -268,7 +268,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.1k</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1145,7 +1145,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>&emsp;&emsp;在Java的I/O类库中，总共有4种类型的操作。其中java.io.InputStream和java.io.OutputStream分别表示字节输入流和字节输出流，它们都是抽象类，不能实例化，数据流中的最小单位是字节，所以叫做字节流。在这里，只介绍字节流的概念和操作。其他I/O流的概念请参考<a href="/2017/09/15/Java/6">Java IO 工作机制</a>。<br><img src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/java%E5%AD%97%E8%8A%82%E6%B5%81.png" alt="字节流"></p>
+          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>&emsp;&emsp;在Java的I/O类库中，总共有4种类型的操作。其中java.io.InputStream和java.io.OutputStream分别表示字节输入流和字节输出流，它们都是抽象类，不能实例化，数据流中的最小单位是字节，所以叫做字节流。在这里，只介绍字节流的概念和操作。其他I/O流的概念请参考<a href="/2017/09/15/Java/6">Java IO 工作机制</a>。<br><img data-src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/java%E5%AD%97%E8%8A%82%E6%B5%81.png" alt="字节流"></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/09/26/Java/9/#more" rel="contents">
@@ -1410,7 +1410,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">78k</span>
+    <span title="站点总字数">79k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -1443,6 +1443,7 @@
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -1480,6 +1481,19 @@
 
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'default',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   

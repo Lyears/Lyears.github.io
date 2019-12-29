@@ -33,7 +33,7 @@
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: true,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: true,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -417,7 +417,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">78k</span>
+    <span title="站点总字数">79k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -450,6 +450,7 @@
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -487,6 +488,19 @@
 
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'default',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   

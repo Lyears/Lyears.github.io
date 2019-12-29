@@ -33,7 +33,7 @@
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: true,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: true,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -291,7 +291,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="SpringMVC运行流程"><a href="#SpringMVC运行流程" class="headerlink" title="SpringMVC运行流程"></a>SpringMVC运行流程</h1><p>&emsp;&emsp;SpringMVC框架是Spring为展现层提供的基于MVC设计理念的优秀Web框架，是目前最主流的MVC框架之一。而它的强大之处就是通过一套MVC注解，让POJO成为处理请求的控制器，而无需实现任何的接口。<a id="more"></a><br>&emsp;&emsp;那么现在，我们开始探寻SpringMVC的运行机制。下面是SpringMVC的运行流程：<br><img src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/SpringMVC%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B.png" alt="MVC"></p>
+        <h1 id="SpringMVC运行流程"><a href="#SpringMVC运行流程" class="headerlink" title="SpringMVC运行流程"></a>SpringMVC运行流程</h1><p>&emsp;&emsp;SpringMVC框架是Spring为展现层提供的基于MVC设计理念的优秀Web框架，是目前最主流的MVC框架之一。而它的强大之处就是通过一套MVC注解，让POJO成为处理请求的控制器，而无需实现任何的接口。<a id="more"></a><br>&emsp;&emsp;那么现在，我们开始探寻SpringMVC的运行机制。下面是SpringMVC的运行流程：<br><img data-src="http://dysmorsel.oss-cn-beijing.aliyuncs.com/blog/images/SpringMVC%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B.png" alt="MVC"></p>
 <h1 id="配置SpringMVC"><a href="#配置SpringMVC" class="headerlink" title="配置SpringMVC"></a>配置SpringMVC</h1><p>&emsp;&emsp;SpringMVC框架围绕DispatcherServlet这个核心展开，它负责截取请求并将其分派给相应的处理器处理。SpringMVC框架包括注解驱动控制器、请求及响应的信息处理、视图解析、本地化解析、上传文件解析、异常处理及表单提交等内容。</p>
 <h2 id="配置DispatcherServlet，截获特定的URL请求"><a href="#配置DispatcherServlet，截获特定的URL请求" class="headerlink" title="配置DispatcherServlet，截获特定的URL请求"></a>配置DispatcherServlet，截获特定的URL请求</h2><p>&emsp;&emsp;我们知道，在传统的JavaWeb项目中，我们可以在web.xml文件中配置一个servlet，然后通过<code>&lt;servlet-mapping&gt;</code>指定其处理的URL。假设我们希望SpringMVC的DispatcherServlet能够截获并处理所有以.html结束的URL请求，那么可以在web.xml中按如下方式进行配置：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- ① --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath*:applicationContext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- ② --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>WEB-INF/springmvc.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- ③ --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -512,7 +512,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">78k</span>
+    <span title="站点总字数">79k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -545,6 +545,7 @@
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -582,6 +583,19 @@
 
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'default',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   

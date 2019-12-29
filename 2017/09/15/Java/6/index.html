@@ -33,7 +33,7 @@
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: true,
     mediumzoom: false,
-    lazyload: false,
+    lazyload: true,
     pangu: true,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
@@ -311,25 +311,25 @@
 <h2 id="基于字节的-I-O-操作接口"><a href="#基于字节的-I-O-操作接口" class="headerlink" title="基于字节的 I/O 操作接口"></a>基于字节的 I/O 操作接口</h2><ul>
 <li>基于字节的 I/O 操作接口输入和输出分别是：InputStream 和 OutputStream，InputStream 输入流的类继承层次如下图所示：</li>
 <li><p>InputStream 相关类层次结构</p>
-<p>  <img src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image002.png" alt="image"></p>
+<p>  <img data-src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image002.png" alt="image"></p>
 </li>
 <li><p>OutputStream 相关类层次结构</p>
-<p>  <img src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image004.png" alt="image"></p>
+<p>  <img data-src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image004.png" alt="image"></p>
 </li>
 </ul>
 <h2 id="基于字符的-I-O-操作接口"><a href="#基于字符的-I-O-操作接口" class="headerlink" title="基于字符的 I/O 操作接口"></a>基于字符的 I/O 操作接口</h2><p>&emsp;&emsp;我们的程序中通常操作的数据都是以字符形式，为了操作方便当然要提供一个直接写字符的 I/O 接口,下图是写字符的 I/O 操作接口涉及到的类，Writer类提供了一个抽象方法<strong>write(char cbuf[], int off, int len)</strong>由子类去实现。</p>
 <ul>
 <li>Writer相关类层次结构</li>
 </ul>
-<p><img src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image006.png" alt="image"><br>&emsp;&emsp;读字符的操作接口也有类似的结构,如下图：</p>
+<p><img data-src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image006.png" alt="image"><br>&emsp;&emsp;读字符的操作接口也有类似的结构,如下图：</p>
 <ul>
 <li>Reader 类层次结构</li>
 </ul>
-<p><img src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image008.png" alt="image"><br>&emsp;&emsp;读字符的操作接口中也是<strong>int read(char cbuf[], int off, int len)</strong>，返回读到的n个字节数，不管是Writer还是Reader类它们都只定义了读取或写入的数据字符的方式，也就是怎么写或读，但是并没有规定数据要写到哪去，写到哪去就是我们后面要讨论的基于磁盘和网络的工作机制。</p>
+<p><img data-src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image008.png" alt="image"><br>&emsp;&emsp;读字符的操作接口中也是<strong>int read(char cbuf[], int off, int len)</strong>，返回读到的n个字节数，不管是Writer还是Reader类它们都只定义了读取或写入的数据字符的方式，也就是怎么写或读，但是并没有规定数据要写到哪去，写到哪去就是我们后面要讨论的基于磁盘和网络的工作机制。</p>
 <h2 id="字节与字符的转化接口"><a href="#字节与字符的转化接口" class="headerlink" title="字节与字符的转化接口"></a>字节与字符的转化接口</h2><ul>
 <li>字符解码相关类结构</li>
 </ul>
-<p><img src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image011.jpg" alt="image"></p>
+<p><img data-src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image011.jpg" alt="image"></p>
 <p>&emsp;&emsp;InputStreamReader 类是字节到字符的转化桥梁，InputStream到 Reader的过程要指定编码字符集，否则将采用操作系统默认字符集，很可能会出现乱码问题。StreamDecoder正是完成字节到字符的解码的实现类。</p>
 <ul>
 <li>读取文件示例代码</li>
@@ -339,10 +339,10 @@
 <ul>
 <li>字符编码相关类结构</li>
 </ul>
-<p><img src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image013.jpg" alt="image"></p>
+<p><img data-src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image013.jpg" alt="image"></p>
 <p>&emsp;&emsp;通过 OutputStreamWriter 类完成，字符到字节的编码过程，由 StreamEncoder 完成编码过程。</p>
-<h2 id="磁盘-I-O-工作机制"><a href="#磁盘-I-O-工作机制" class="headerlink" title="磁盘 I/O 工作机制"></a>磁盘 I/O 工作机制</h2><p>&emsp;&emsp;前面介绍了基本的 Java I/O 的操作接口，这些接口主要定义了如何操作数据，以及介绍了操作两种数据结构：字节和字符的方式。还有一个关键问题就是数据写到何处，其中一个主要方式就是将数据持久化到物理磁盘，下面将介绍如何将数据持久化到物理磁盘的过程。<br>&emsp;&emsp;我们知道数据在磁盘的唯一最小描述就是文件，也就是说上层应用程序只能通过文件来操作磁盘上的数据，文件也是操作系统和磁盘驱动器交互的一个最小单元。值得注意的是Java中通常的File并不代表一个真实存在的文件对象，当你通过指定一个路径描述符时，它就会返回一个代表这个路径相关联的一个虚拟对象，这个可能是一个真实存在的文件或者是一个包含多个文件的目录。为何要这样设计？<strong>因为大部分情况下，我们并不关心这个文件是否真的存在，而是关心这个文件到底如何操作。</strong>例如我们手机里通常存了几百个朋友的电话号码，但是我们通常关心的是我有没有这个朋友的电话号码，或者这个电话号码是什么，但是这个电话号码到底能不能打通，我们并不是时时刻刻都去检查，而只有在真正要给他打电话时才会看这个电话能不能用。也就是使用这个电话记录要比打这个电话的次数多很多。<br>&emsp;&emsp;何时真正会要检查一个文件存不存？就是在真正要读取这个文件时，例如 FileInputStream类都是操作一个文件的接口，注意到在创建一个 FileInputStream对象时，会创建一个FileDescriptor对象，其实这个对象就是真正代表一个存在的文件对象的描述，当我们在操作一个文件对象时可以通过getFD()方法获取真正操作的与底层操作系统关联的文件描述。例如可以调用FileDescriptor.sync()方法将操作系统缓存中的数据强制刷新到物理磁盘中。<br>&emsp;&emsp;下面以上述代码块的程序为例，介绍下如何从磁盘读取一段文本字符。如下图所示：<br><img src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image015.jpg" alt="image"><br>&emsp;&emsp;当传入一个文件路径，将会根据这个路径创建一个File对象来标识这个文件，然后将会根据这个File对象创建真正读取文件的操作对象，这时将会真正创建一个关联真实存在的磁盘文件的文件描述符FileDescriptor，通过这个对象可以直接控制这个磁盘文件。由于我们需要读取的是字符格式，所以需要StreamDecoder类将byte解码为char格式，至于如何从磁盘驱动器上读取一段数据，由操作系统帮我们完成。至于操作系统是如何将数据持久化到磁盘以及如何建立数据结构需要根据当前操作系统使用何种文件系统来回答，至于文件系统的相关细节可以参考另外的文章。</p>
-<h2 id="Java-Socket的工作机制"><a href="#Java-Socket的工作机制" class="headerlink" title="Java Socket的工作机制"></a>Java Socket的工作机制</h2><p>&emsp;&emsp;Socket这个概念没有对应到一个具体的实体，它是描述计算机之间完成相互通信一种抽象功能。打个比方，可以把Socket比作为两个城市之间的交通工具，有了它，就可以在城市之间来回穿梭了。交通工具有多种，每种交通工具也有相应的交通规则。Socket也一样，也有多种。大部分情况下我们使用的都是基于TCP/IP的流套接字，它是一种稳定的通信协议。<br>下图是典型的基于 Socket 的通信的场景：<br><img src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image017.jpg" alt="image"><br>&emsp;&emsp;主机A的应用程序要能和主机B的应用程序通信，必须通过Socket建立连接，而建立Socket连接必须需要底层TCP/IP协议来建立TCP连接。建立TCP连接需要底层IP协议来寻址网络中的主机。我们知道网络层使用的 IP 协议可以帮助我们根据IP地址来找到目标主机，但是一台主机上可能运行着多个应用程序，如何才能与指定的应用程序通信就要通过TCP或UPD的地址也就是端口号来指定。这样就可以通过一个Socket实例唯一代表一个主机上的一个应用程序的通信链路了。</p>
+<h2 id="磁盘-I-O-工作机制"><a href="#磁盘-I-O-工作机制" class="headerlink" title="磁盘 I/O 工作机制"></a>磁盘 I/O 工作机制</h2><p>&emsp;&emsp;前面介绍了基本的 Java I/O 的操作接口，这些接口主要定义了如何操作数据，以及介绍了操作两种数据结构：字节和字符的方式。还有一个关键问题就是数据写到何处，其中一个主要方式就是将数据持久化到物理磁盘，下面将介绍如何将数据持久化到物理磁盘的过程。<br>&emsp;&emsp;我们知道数据在磁盘的唯一最小描述就是文件，也就是说上层应用程序只能通过文件来操作磁盘上的数据，文件也是操作系统和磁盘驱动器交互的一个最小单元。值得注意的是Java中通常的File并不代表一个真实存在的文件对象，当你通过指定一个路径描述符时，它就会返回一个代表这个路径相关联的一个虚拟对象，这个可能是一个真实存在的文件或者是一个包含多个文件的目录。为何要这样设计？<strong>因为大部分情况下，我们并不关心这个文件是否真的存在，而是关心这个文件到底如何操作。</strong>例如我们手机里通常存了几百个朋友的电话号码，但是我们通常关心的是我有没有这个朋友的电话号码，或者这个电话号码是什么，但是这个电话号码到底能不能打通，我们并不是时时刻刻都去检查，而只有在真正要给他打电话时才会看这个电话能不能用。也就是使用这个电话记录要比打这个电话的次数多很多。<br>&emsp;&emsp;何时真正会要检查一个文件存不存？就是在真正要读取这个文件时，例如 FileInputStream类都是操作一个文件的接口，注意到在创建一个 FileInputStream对象时，会创建一个FileDescriptor对象，其实这个对象就是真正代表一个存在的文件对象的描述，当我们在操作一个文件对象时可以通过getFD()方法获取真正操作的与底层操作系统关联的文件描述。例如可以调用FileDescriptor.sync()方法将操作系统缓存中的数据强制刷新到物理磁盘中。<br>&emsp;&emsp;下面以上述代码块的程序为例，介绍下如何从磁盘读取一段文本字符。如下图所示：<br><img data-src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image015.jpg" alt="image"><br>&emsp;&emsp;当传入一个文件路径，将会根据这个路径创建一个File对象来标识这个文件，然后将会根据这个File对象创建真正读取文件的操作对象，这时将会真正创建一个关联真实存在的磁盘文件的文件描述符FileDescriptor，通过这个对象可以直接控制这个磁盘文件。由于我们需要读取的是字符格式，所以需要StreamDecoder类将byte解码为char格式，至于如何从磁盘驱动器上读取一段数据，由操作系统帮我们完成。至于操作系统是如何将数据持久化到磁盘以及如何建立数据结构需要根据当前操作系统使用何种文件系统来回答，至于文件系统的相关细节可以参考另外的文章。</p>
+<h2 id="Java-Socket的工作机制"><a href="#Java-Socket的工作机制" class="headerlink" title="Java Socket的工作机制"></a>Java Socket的工作机制</h2><p>&emsp;&emsp;Socket这个概念没有对应到一个具体的实体，它是描述计算机之间完成相互通信一种抽象功能。打个比方，可以把Socket比作为两个城市之间的交通工具，有了它，就可以在城市之间来回穿梭了。交通工具有多种，每种交通工具也有相应的交通规则。Socket也一样，也有多种。大部分情况下我们使用的都是基于TCP/IP的流套接字，它是一种稳定的通信协议。<br>下图是典型的基于 Socket 的通信的场景：<br><img data-src="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/image017.jpg" alt="image"><br>&emsp;&emsp;主机A的应用程序要能和主机B的应用程序通信，必须通过Socket建立连接，而建立Socket连接必须需要底层TCP/IP协议来建立TCP连接。建立TCP连接需要底层IP协议来寻址网络中的主机。我们知道网络层使用的 IP 协议可以帮助我们根据IP地址来找到目标主机，但是一台主机上可能运行着多个应用程序，如何才能与指定的应用程序通信就要通过TCP或UPD的地址也就是端口号来指定。这样就可以通过一个Socket实例唯一代表一个主机上的一个应用程序的通信链路了。</p>
 <h3 id="建立通信链路"><a href="#建立通信链路" class="headerlink" title="建立通信链路"></a>建立通信链路</h3><p>&emsp;&emsp;当客户端要与服务端通信，客户端首先要创建一个Socket实例，操作系统将为这个Socket实例分配一个没有被使用的本地端口号，并创建一个包含本地和远程地址和端口号的套接字数据结构，这个数据结构将一直保存在系统中直到这个连接关闭。在创建Socket实例的构造函数正确返回之前，将要进行 TCP 的三次握手协议，TCP 握手协议完成后，Socket实例对象将创建完成，否则将抛出IOException错误。<br>&emsp;&emsp;与之对应的服务端将创建一个ServerSocket实例ServerSocket创建比较简单只要指定的端口号没有被占用，一般实例创建都会成功，同时操作系统也会为ServerSocket实例创建一个底层数据结构，这个数据结构中包含指定监听的端口号和包含监听地址的通配符，通常情况下都是“*”即监听所有地址。之后当调用accept()方法时，将进入阻塞状态，等待客户端的请求。当一个新的请求到来时，将为这个连接创建一个新的套接字数据结构，该套接字数据的信息包含的地址和端口信息正是请求源地址和端口。这个新创建的数据结构将会关联到ServerSocket实例的一个未完成的连接数据结构列表中，注意这时服务端与之对应的Socket实例并没有完成创建，而要等到与客户端的三次握手完成后，这个服务端的Socket实例才会返回，并将这个Socket实例对应的数据结构从未完成列表中移到已完成列表中。所以ServerSocket所关联的列表中每个数据结构，都代表与一个客户端的建立的TCP连接。</p>
 <h3 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h3><p>&emsp;&emsp;传输数据是我们建立连接的主要目的，如何通过Socket传输数据，下面将详细介绍。<br>&emsp;&emsp;当连接已经建立成功，服务端和客户端都会拥有一个Socket实例，每个Socket实例都有一个InputStream和OutputStream正是通过这两个对象来交换数据。同时我们也知道网络I/O都是以字节流传输的。当Socket对象创建时，操作系统将会为InputStream和OutputStream分别分配一定大小的缓冲区，数据的写入和读取都是通过这个缓存区完成的。写入端将数据写到OutputStream对应的 SendQ 队列中，当队列填满时，数据将被发送到另一端InputStream的RecvQ队列中，如果这时RecvQ已经满了，那么OutputStream的write方法将会阻塞直到RecvQ队列有足够的空间容纳SendQ发送的数据。值得特别注意的是，这个缓存区的大小以及写入端的速度和读取端的速度非常影响这个连接的数据传输效率，由于可能会发生阻塞，所以网络I/O与磁盘I/O在数据的写入和读取还要有一个协调的过程，如果两边同时传送数据时可能会产生死锁。</p>
 
@@ -526,7 +526,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">78k</span>
+    <span title="站点总字数">79k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -559,6 +559,7 @@
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -596,6 +597,19 @@
 
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'default',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   
