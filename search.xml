@@ -988,6 +988,134 @@ n&=8=1×5^1+3
       </tags>
   </entry>
   <entry>
+    <title>Java 包装类详解</title>
+    <url>/blog/2017/09/15/Java/3/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>Java语言是一个面向对象的语言，但是Java中的基本数据类型却是不面向对象的为了解决这个不足，在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类(Wrapper Class)，有些地方也翻译为外覆类或数据类型类。</li>
+<li>包装类均位于Java.lang包，包装类和基本数据类型的对应关系如下表所示：</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>包装类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <a id="more"></a>
+<ul>
+<li>对于包装类说，这些类的用途主要包含两种：<ul>
+<li>作为和基本数据类型对应的类类型存在，方便涉及到对象的操作。</li>
+<li>包含每种基本数据类型的相关属性如最大值、最小值等，以及相关的操作方法。</li>
+</ul>
+</li>
+<li>下面使用Integer类来介绍包装类的基本用法。</li>
+</ul>
+<h1 id="简单使用："><a href="#简单使用：" class="headerlink" title="简单使用："></a>简单使用：</h1><ul>
+<li><p>1、实现int和Integer类之间的转换：</p>
+<p>&emsp;&emsp;在实际转换时，使用Integer类的构造方法和Integer类内部的intValue方法实现这些类型之间的相互转换，实现的代码如下：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">Integer in = <span class="keyword">new</span> Integer(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//将int类型转换为Integer类型</span></span><br><span class="line">Integer in1 = <span class="keyword">new</span> Integer(n);</span><br><span class="line"><span class="comment">//将Integer类型的对象转换为int类型</span></span><br><span class="line"><span class="keyword">int</span> m = in.intValue();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2、其他常用转化方法如下：</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法名</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td>byteValue()</td>
+<td>将Integer转为byte类型</td>
+</tr>
+<tr>
+<td>double</td>
+<td>doubleValue()</td>
+<td>转为double类型</td>
+</tr>
+<tr>
+<td>float</td>
+<td>floatValue()</td>
+<td>转为float类型</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>3、与字符串相关的方法：<ul>
+<li>parseInt方法：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">parseInt</span><span class="params">(String s)</span></span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;该方法的作用是将数字字符串转换为int数值。在以后的界面编程中，将字符串转换为对应的int数字是一种比较常见的操作。使用示例如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String s = “<span class="number">123</span>”;</span><br><span class="line"><span class="keyword">int</span> n = Integer.parseInt(s);</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;该方法实际上实现了字符串和int之间的转换，如果字符串都包含的不是都是数字字符，则程序执行将出现异常。</p>
+<p>另外一个parseInt方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">parseInt</span><span class="params">(String s, <span class="keyword">int</span> radix)</span></span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;实现将字符串按照参数radix指定的进制转换为int。</p>
+<ul>
+<li>toString方法：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toString</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;该方法的作用是将int类型转换为对应的String类型。</p>
+<h1 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h1><ul>
+<li>JDK自从1.5(5.0)版本以后，就引入了自动拆装箱的语法，也就是在进行基本数据类型和对应的包装类转换时，系统将自动进行，这将大大方便程序员的代码书写。</li>
+<li>代码示例：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//int类型会自动转换为Integer类型</span></span><br><span class="line"><span class="keyword">int</span> m = <span class="number">12</span>;</span><br><span class="line">Integer in = m;</span><br><span class="line"><span class="comment">//Integer类型会自动转换为int类型</span></span><br><span class="line"><span class="keyword">int</span> n = in;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java 类库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java核心类</title>
     <url>/blog/2017/09/15/Java/4/</url>
     <content><![CDATA[<h1 id="Object-类"><a href="#Object-类" class="headerlink" title="Object 类"></a>Object 类</h1><h2 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals() 方法"></a>equals() 方法</h2><ul>
@@ -1207,134 +1335,6 @@ n&=8=1×5^1+3
 </tbody>
 </table>
 </div>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java 类库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 包装类详解</title>
-    <url>/blog/2017/09/15/Java/3/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
-<li>Java语言是一个面向对象的语言，但是Java中的基本数据类型却是不面向对象的为了解决这个不足，在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类(Wrapper Class)，有些地方也翻译为外覆类或数据类型类。</li>
-<li>包装类均位于Java.lang包，包装类和基本数据类型的对应关系如下表所示：</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>基本数据类型</th>
-<th>包装类</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>byte</td>
-<td>Byte</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>Boolean</td>
-</tr>
-<tr>
-<td>short</td>
-<td>Short</td>
-</tr>
-<tr>
-<td>char</td>
-<td>Character</td>
-</tr>
-<tr>
-<td>int</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>long</td>
-<td>Long</td>
-</tr>
-<tr>
-<td>float</td>
-<td>Float</td>
-</tr>
-<tr>
-<td>double</td>
-<td>Double</td>
-</tr>
-</tbody>
-</table>
-</div>
-  <a id="more"></a>
-<ul>
-<li>对于包装类说，这些类的用途主要包含两种：<ul>
-<li>作为和基本数据类型对应的类类型存在，方便涉及到对象的操作。</li>
-<li>包含每种基本数据类型的相关属性如最大值、最小值等，以及相关的操作方法。</li>
-</ul>
-</li>
-<li>下面使用Integer类来介绍包装类的基本用法。</li>
-</ul>
-<h1 id="简单使用："><a href="#简单使用：" class="headerlink" title="简单使用："></a>简单使用：</h1><ul>
-<li><p>1、实现int和Integer类之间的转换：</p>
-<p>&emsp;&emsp;在实际转换时，使用Integer类的构造方法和Integer类内部的intValue方法实现这些类型之间的相互转换，实现的代码如下：</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">Integer in = <span class="keyword">new</span> Integer(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//将int类型转换为Integer类型</span></span><br><span class="line">Integer in1 = <span class="keyword">new</span> Integer(n);</span><br><span class="line"><span class="comment">//将Integer类型的对象转换为int类型</span></span><br><span class="line"><span class="keyword">int</span> m = in.intValue();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>2、其他常用转化方法如下：</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>返回值</th>
-<th>方法名</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>byte</td>
-<td>byteValue()</td>
-<td>将Integer转为byte类型</td>
-</tr>
-<tr>
-<td>double</td>
-<td>doubleValue()</td>
-<td>转为double类型</td>
-</tr>
-<tr>
-<td>float</td>
-<td>floatValue()</td>
-<td>转为float类型</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>3、与字符串相关的方法：<ul>
-<li>parseInt方法：</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">parseInt</span><span class="params">(String s)</span></span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;该方法的作用是将数字字符串转换为int数值。在以后的界面编程中，将字符串转换为对应的int数字是一种比较常见的操作。使用示例如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String s = “<span class="number">123</span>”;</span><br><span class="line"><span class="keyword">int</span> n = Integer.parseInt(s);</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;该方法实际上实现了字符串和int之间的转换，如果字符串都包含的不是都是数字字符，则程序执行将出现异常。</p>
-<p>另外一个parseInt方法：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">parseInt</span><span class="params">(String s, <span class="keyword">int</span> radix)</span></span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;实现将字符串按照参数radix指定的进制转换为int。</p>
-<ul>
-<li>toString方法：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toString</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;该方法的作用是将int类型转换为对应的String类型。</p>
-<h1 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h1><ul>
-<li>JDK自从1.5(5.0)版本以后，就引入了自动拆装箱的语法，也就是在进行基本数据类型和对应的包装类转换时，系统将自动进行，这将大大方便程序员的代码书写。</li>
-<li>代码示例：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//int类型会自动转换为Integer类型</span></span><br><span class="line"><span class="keyword">int</span> m = <span class="number">12</span>;</span><br><span class="line">Integer in = m;</span><br><span class="line"><span class="comment">//Integer类型会自动转换为int类型</span></span><br><span class="line"><span class="keyword">int</span> n = in;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Java</category>
